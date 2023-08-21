@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Open+Sans:wght@500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Lucidica Client Portal</title>
+</head>
+
+<body>
+  <!-- <div class="container"> -->
+    <div class="btn-inner">
+      <a href="mailto:helpdesk@lucidica.com" class="btn">Contact HelpDesk</a>
+      <a href="mailto:accounts@lucidica.com" class="btn">Contact Accounts</a>
+      <a href="mailto:service@lucidica.com" class="btn">Contact Sales and Service</a>
+    </div>
+
+
+    <div class="logo-inner">
+      <a href="https://lucidica.co.uk/">
+        <img class="logo" src="download.png" alt="">
+      </a>
+    </div>
+ 
+  <!-- </div> -->
+  <div class="close-wrapper">
+    <button id="close" class="btn-close">    
+      ❌
+    </button>
+  </div>
+  
+
+  <div id="status"></div>
+
+  <span class="loader"></span>
+  <div id="contactDetails">
+   
+    <p id="firstNameField">First Name:</p>
+    <p id="lastNameField">Last Name: </p>
+    <p id="emailField">Email:</p>
+    <p id="mobileField">Mobile: </p>
+    <p id="landlineField">Landline: </p>
+  </div>
+
+  <div id="contactDetails"></div>
+
+  <div class="btn-wrapper">
+    <button id="edit" class="btn">Edit Info</button>
+  </div>
+ 
+  <!-- <button id="submit" class="btn">Submit from</button> -->
+
+  <footer>
+    <p>Powered by Lucidica&#169</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
