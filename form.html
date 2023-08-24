@@ -52,6 +52,7 @@
 
   <div class="btn-wrapper">
     <button id="edit" class="btn">Edit Info</button>
+    <button id="edit" class="btn modal__btn">Add new Contact</button>
   </div>
  
   <!-- <button id="submit" class="btn">Submit from</button> -->
@@ -60,7 +61,32 @@
     <p>Powered by Lucidica&#169</p>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Modal -->
+<div class="modal__wrapper">
+  <div class="modal">
+      <div class="modal__close"> 
+        ❌
+      </div>
+      <div class="modal__title"><span>Add new Contact Information</span> </div>
+      <div class="modal__body">
+        <div class="">
+          <div>First Name: <input type="text"></div>
+          <div>Last Name:<input type="text"></div>
+          <div>Email:<input type="text"></div>
+          <div>Mobile:<input type="text"></div>
+          <div>Landline:<input type="text"></div>
+          <div class='hide'>ID:<input type="text"></div>
+          <div class=''>ID:<input type="text"></div>
+          <button class="btn">Submit Contacts</button>
+        </div>
+       
+      </div>
+      
+  </div>
+</div>
+<!-- <a href="#" class="btn modal__btn">Open modal</a> -->
+
+  <script type="module" defer src="script.js"></script>
 </body>
 
 </html>
