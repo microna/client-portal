@@ -1,3 +1,19 @@
+
+
+{
+"updateType":"Not VIP",
+"ContactDetails":[{
+    "email":"",
+    "firstName":"",
+    "id":631,
+    "landline":"",
+    "lastName":"",
+    "mobile":"",
+    "status":"Active"
+}]
+}
+
+
 {
     "Status": "VIP",
     "UserId": 7216,

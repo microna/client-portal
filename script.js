@@ -30,7 +30,7 @@ editBtn.addEventListener('click', () => {
 
 
 
-  if (document.querySelectorAll('#form-input') <= 7) {
+  if (document.querySelectorAll('#form-input').length <= 7) {
     document.querySelectorAll('#form-input')[0].classList.add('first-name')
     document.querySelectorAll('#form-input')[1].classList.add('last-name')
     document.querySelectorAll('#form-input')[2].classList.add('email')
@@ -38,7 +38,9 @@ editBtn.addEventListener('click', () => {
     document.querySelectorAll('#form-input')[4].classList.add('landline')
     document.querySelectorAll('#form-input')[5].classList.add('id')
     document.querySelectorAll('#form-input')[6].classList.add('status-vip')
+    // console.log('not vip')
   } else {
+    console.log('vip')
     document.querySelectorAll('#form-input')[0].classList.add('company-name')
     document.querySelectorAll('#form-input')[1].classList.add('adress-line-1')
     document.querySelectorAll('#form-input')[2].classList.add('adress-line-2')
@@ -55,8 +57,6 @@ editBtn.addEventListener('click', () => {
     document.querySelectorAll('#form-input')[13].classList.add('comms-contact')
     document.querySelectorAll('#form-input')[14].classList.add('tech-contact')
   }
-
-  console.log(document.querySelectorAll('#form-input').length)
 
   closeBtn.addEventListener('click', () => {
     const inputParagraphs = contactDiv.querySelectorAll('p');
@@ -87,10 +87,11 @@ editBtn.addEventListener('click', () => {
   //    sending request to Core4 for updating the info
   document.querySelector('.btn-submit').addEventListener('click', () => {
 
+
     if (document.querySelector('.status-vip').value === 'Not VIP') {
       const data = {
         "updateType": "Not VIP",
-        "contacts": [
+        "ContactDetails": [
           {
             "email": document.querySelector('.email').value,
             "firstName": document.querySelector('.first-name').value,
@@ -98,7 +99,7 @@ editBtn.addEventListener('click', () => {
             "landline": document.querySelector('.landline').value,
             "lastName": document.querySelector('.last-name').value,
             "mobile": document.querySelector('.mobile').value,
-
+            "status": "Active"
           }
         ]
       };
@@ -286,7 +287,6 @@ editBtn.addEventListener('click', () => {
           // Handle any errors here
         });
     }
-    console.log(document.querySelector('.status-vip').value)
 
 
 
@@ -328,26 +328,27 @@ document.getElementById('submit-contracts').addEventListener('click', () => {
 
   const data = {
     "updateType": "Not VIP",
-    "contacts": [
-      {
-        "email": document.querySelector('.email').value,
-        "firstName": document.querySelector('.first-name').value,
-        // "id": parseInt(document.querySelector('.id').value),
-        "landline": document.querySelector('.landline').value,
-        "lastName": document.querySelector('.last-name').value,
-        "mobile": document.querySelector('.mobile').value,
-
-      }
-    ]
-  };
+    "ContactDetails": [{
+      "email": document.querySelector('.email').value,
+      "firstName": document.querySelector('.first-name').value,
+      // "id": parseInt(document.querySelector('.id').value),
+      "id": 631,
+      "landline": document.querySelector('.landline').value,
+      "lastName": document.querySelector('.last-name').value,
+      "mobile": document.querySelector('.mobile').value,
+      "status": 'Active'
+    }]
+  }
 
   fetch(apiUrlUpdate, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
+   
     body: JSON.stringify(data)
   })
+  // console.log(JSON.stringify(data))
     .then(response => {
       if (response.ok) {
         return response.text();
@@ -365,5 +366,8 @@ document.getElementById('submit-contracts').addEventListener('click', () => {
     });
 
 })
+
+
+// console.log(JSON.stringify(data))
 
 
