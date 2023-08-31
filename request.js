@@ -90,7 +90,7 @@ export async function fetchDataAndDisplay() {
             data.ContactDetails.forEach(contact => {
                 selectHTML += `<option>${contact.firstName} ${contact.lastName}</option>`;
             });
-            selectHTML += '</select></div><button class="btn modal__btn" id="check-active">Cheack Active-Inactive clients</button></div>';
+            selectHTML += '</select></div><button class="btn modal__btn-clients" id="check-active">Cheack Active-Inactive clients</button></div>';
 
             contactDiv.innerHTML += selectHTML;
         }
@@ -106,13 +106,94 @@ export async function fetchDataAndDisplay() {
 function handleButtonClick(event) {
     const clickedElement = event.target;  
     if (clickedElement.id === 'check-active') {
-     
-     
+        function bindModal(trigger, modal, close) {
+            trigger = document.querySelector(trigger),
+              modal = document.querySelector(modal),
+              close = document.querySelector(close)
+          
+            const body = document.body
+          
+            trigger.addEventListener('click', e => {
+              e.preventDefault()
+              modal.style.display = 'flex'
+              body.classList.add('locked')
+            });
+            close.addEventListener('click', () => {
+              modal.style.display = 'none'
+              body.classList.remove('locked')
+            });
+            modal.addEventListener('click', e => {
+              if (e.target === modal) {
+                modal.style.display = 'none'
+                body.classList.remove('locked')
+              }
+            })
+          }
+
+          bindModal('.modal__btn-clients', '.modal__wrapper-clients', '.modal__close-clients')
     } else {
-        console.log('nope')
+     
     }
   }
   
   const parentContainer = document.getElementById('contactDetails');
   parentContainer.addEventListener('click', handleButtonClick);
 
+
+  let clientDivToDisplay = document.querySelector('.client-active-list')
+
+  export async function clientDataAndDisplay() {
+    const loader = document.querySelector('.loader'); 
+    loader.classList.remove('hide'); 
+
+    try {
+        const response = await fetch(apiUrlResponse, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        loader.classList.add('hide'); 
+
+
+        for (const contact of data.ContactDetails) {
+            clientDivToDisplay.innerHTML += `<div class='client__list-item'>${contact.firstName} ${contact.lastName} <label class="switch">
+            <input type="checkbox" id="switch">
+            <span class="slider round"></span>
+          </label></div>`
+   
+        
+        }
+       let switcher = document.querySelectorAll('#switch') 
+
+       for (const active of data.ContactDetails) {
+        console.log(active.status)  
+        if(active.status === 'Active'){
+            for(let i = 0; i < switcher.length; i++){
+               console.log(switcher[i]) 
+                switcher[i].checked = true;
+            }
+        }  else {
+            console.log('hyi')
+        }
+    }
+
+     
+    
+        
+        
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+
+
+// document.getElementById("switch").checked = !document.getElementById("switch").checked;
+
+
+clientDataAndDisplay()
