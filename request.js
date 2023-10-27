@@ -1,4 +1,4 @@
-import {contactDiv} from './script.js'
+import { contactDiv } from './script.js'
 
 
 
@@ -6,13 +6,13 @@ import {contactDiv} from './script.js'
 const apiUrlResponse = 'https://prod-65.westeurope.logic.azure.com:443/workflows/bc94942c62fd477dbf2f06318d94ffab/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=XhViloLytf5XtTX11P-u5u_ZuIsBuOzKr13zGoh7JiI';
 
 const payload = {
-    email: 'tracy@sureintegrated.co.uk'
+    email: 'clientvip@test.com'
     // email: 'kievonfire@gmail.com'
 };
 
 export async function fetchDataAndDisplay() {
-    const loader = document.querySelector('.loader'); 
-    loader.classList.remove('hide'); 
+    const loader = document.querySelector('.loader');
+    loader.classList.remove('hide');
 
     try {
         const response = await fetch(apiUrlResponse, {
@@ -25,7 +25,7 @@ export async function fetchDataAndDisplay() {
 
         const data = await response.json();
 
-        loader.classList.add('hide'); 
+        loader.classList.add('hide');
 
         if (data.updateType === 'Not VIP') {
             contactDiv.innerHTML = `
@@ -49,7 +49,10 @@ export async function fetchDataAndDisplay() {
         <p>Country:<span>${data.CompanyDetails.country}</span></p>
         <p>Company RegNO:<span>${data.CompanyDetails.companyRegNo}</span></p>
         <p>Client Industry:<span>${data.CompanyDetails.clientIndustry}</span></p>
-        <p>Client size:<span>${data.CompanyDetails.clientSize}</span></p>
+        
+        <p>Client size:<span><select>
+        <option>${data.CompanyDetails.clientSize}</option>
+        </select></span></p>
         <p>Website:<span>${data.CompanyDetails.website}</span></p>
         <p>Company ID(to hide):<span>${data.CompanyDetails.id}</span></p>
         <p class=''>ID:<span class="status-is-vip">${data.Status}</span></p>
@@ -57,28 +60,57 @@ export async function fetchDataAndDisplay() {
 
             function inputCommsContacts() {
                 const commsContactsArray = data.CompanyDetails.commsContacts;
-
                 if (commsContactsArray && commsContactsArray.length > 0) {
-                    commsContactsArray.forEach(contact => {
+
+                    // Create a <select> element
+                    // var select = document.createElement('select');
+                    // var option = document.createElement('option');
+                    // contactDiv.innerHTML +=
+                    //     `<p>comms contact</p>`
+                    // Loop through the data and create <option> elements
+                    var select = document.createElement('select');
+                    commsContactsArray.forEach(function (contact) {
                         contactDiv.innerHTML +=
-                            `<p>Id to hide cooms contact:<span> ${contact.Id}</span></p>
-                        <p>Comms contact :<span> ${contact.Value}</span></p>`
+                        `<p>comms ID to hide: ${contact.Id}</p>`
+                        contactDiv.innerHTML +=
+                        `<p>comms contact:</p>`
+                        var option = document.createElement('option');
+                        option.text = `${contact.Value}`;
+                        select.appendChild(option);
+                        });
+
+                    data.ContactDetails.forEach(contact => {
+                        var option = document.createElement('option');
+                        option.text = `${contact.firstName} ${contact.lastName}`;
+                        select.appendChild(option);
                     });
+                    contactDiv.appendChild(select)
+
                 } else {
                     console.log('No comms contacts found.')
                 }
             }
-
             inputCommsContacts();
 
             function inputTechContacts() {
+                var select = document.createElement('select');
                 const techContactsArray = data.CompanyDetails.techContacts;
                 if (techContactsArray && techContactsArray.length > 0) {
                     techContactsArray.forEach(contact => {
                         contactDiv.innerHTML +=
-                            `<p>Id to hide tech contact:<span> ${contact.Id}</span></p>
-                        <p>Tech contact:<span> ${contact.Value}</span></p>`
+                        `<p>tech ID to hide: ${contact.Id}</p>`
+                        contactDiv.innerHTML +=
+                        `<p>tech contact:</p>`
+                        var option = document.createElement('option');
+                        option.text = `${contact.Value}`;
+                        select.appendChild(option);
                     });
+                    data.ContactDetails.forEach(contact => {
+                        var option = document.createElement('option');
+                        option.text = `${contact.firstName} ${contact.lastName}`;
+                        select.appendChild(option);
+                    });
+                    contactDiv.appendChild(select)
                 } else {
                     console.log('No tech contacts found.')
                 }
@@ -104,49 +136,53 @@ export async function fetchDataAndDisplay() {
 
 
 function handleButtonClick(event) {
-    const clickedElement = event.target;  
+    const clickedElement = event.target;
     if (clickedElement.id === 'check-active') {
         function bindModal(trigger, modal, close) {
             trigger = document.querySelector(trigger),
-              modal = document.querySelector(modal),
-              close = document.querySelector(close)
-          
+                modal = document.querySelector(modal),
+                close = document.querySelector(close)
+
             const body = document.body
-          
+
             trigger.addEventListener('click', e => {
-              e.preventDefault()
-              modal.style.display = 'flex'
-              body.classList.add('locked')
+                e.preventDefault()
+                modal.style.display = 'flex'
+                body.classList.add('locked')
             });
             close.addEventListener('click', () => {
-              modal.style.display = 'none'
-              body.classList.remove('locked')
-            });
-            modal.addEventListener('click', e => {
-              if (e.target === modal) {
                 modal.style.display = 'none'
                 body.classList.remove('locked')
-              }
+            });
+            modal.addEventListener('click', e => {
+                if (e.target === modal) {
+                    modal.style.display = 'none'
+                    body.classList.remove('locked')
+                }
             })
-          }
+        }
 
-          bindModal('.modal__btn-clients', '.modal__wrapper-clients', '.modal__close-clients')
+        bindModal('.modal__btn-clients', '.modal__wrapper-clients', '.modal__close-clients')
     } else {
-     
+
     }
-  }
-  
-  const parentContainer = document.getElementById('contactDetails');
-  parentContainer.addEventListener('click', handleButtonClick);
+}
+
+const parentContainer = document.getElementById('contactDetails');
+parentContainer.addEventListener('click', handleButtonClick);
 
 
-  let clientDivToDisplay = document.querySelector('.client-active-list')
-
-  export async function clientDataAndDisplay() {
-    const loader = document.querySelector('.loader'); 
-    loader.classList.remove('hide'); 
+let clientDivToDisplay = document.querySelector('.client-active-list')
+let btnSubmitActiveClients = document.createElement('button')
+btnSubmitActiveClients.innerHTML = 'Submit'
+btnSubmitActiveClients.classList.add('btn-submit')
+export async function clientDataAndDisplay() {
+   
+    const loader = document.querySelector('.loader');
+    loader.classList.remove('hide');
 
     try {
+         
         const response = await fetch(apiUrlResponse, {
             method: 'POST',
             headers: {
@@ -157,7 +193,7 @@ function handleButtonClick(event) {
 
         const data = await response.json();
 
-        loader.classList.add('hide'); 
+        loader.classList.add('hide');
 
 
         for (const contact of data.ContactDetails) {
@@ -165,35 +201,30 @@ function handleButtonClick(event) {
             <input type="checkbox" id="switch">
             <span class="slider round"></span>
           </label></div>`
+
+
+        }
+        let switcher = document.querySelectorAll('#switch')
    
-        
-        }
-       let switcher = document.querySelectorAll('#switch') 
-
-       for (const active of data.ContactDetails) {
-        console.log(active.status)  
-        if(active.status === 'Active'){
-            for(let i = 0; i < switcher.length; i++){
-               console.log(switcher[i]) 
-                switcher[i].checked = true;
+        for (const active of data.ContactDetails) {
+            console.log(active.status)
+            if (active.status === 'Active') {
+                for (let i = 0; i < switcher.length; i++) {
+                    console.log(switcher[i])
+                    switcher[i].checked = true;
+                }
+             
+            } else {
+                console.log('hyi')
             }
-        }  else {
-            console.log('hyi')
         }
-    }
 
-     
-    
-        
         
     } catch (error) {
         console.error('Error:', error);
     }
+    clientDivToDisplay.appendChild(btnSubmitActiveClients)  
 }
-
-
-
-// document.getElementById("switch").checked = !document.getElementById("switch").checked;
 
 
 clientDataAndDisplay()

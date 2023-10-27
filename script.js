@@ -3,9 +3,9 @@ export const contactDiv = document.getElementById('contactDetails');
 const editBtn = document.getElementById('edit');
 const closeBtn = document.getElementById('close');
 import { fetchDataAndDisplay } from './request.js'
+import { apiUrlUpdate } from './routes.js'
 
 fetchDataAndDisplay()
-
 editBtn.addEventListener('click', () => {
   editBtn.classList.add('hide')
   closeBtn.classList.remove('hide')
@@ -28,8 +28,6 @@ editBtn.addEventListener('click', () => {
   document.querySelector('.btn-wrapper').appendChild(submitButton)
 
 
-
-
   if (document.querySelectorAll('#form-input').length <= 7) {
     document.querySelectorAll('#form-input')[0].classList.add('first-name')
     document.querySelectorAll('#form-input')[1].classList.add('last-name')
@@ -38,7 +36,6 @@ editBtn.addEventListener('click', () => {
     document.querySelectorAll('#form-input')[4].classList.add('landline')
     document.querySelectorAll('#form-input')[5].classList.add('id')
     document.querySelectorAll('#form-input')[6].classList.add('status-vip')
-    // console.log('not vip')
   } else {
     console.log('vip')
     document.querySelectorAll('#form-input')[0].classList.add('company-name')
@@ -82,11 +79,10 @@ editBtn.addEventListener('click', () => {
   });
 
 
-  const apiUrlUpdate = 'https://prod-14.westeurope.logic.azure.com/workflows/aeed5485e6ee44059332d53c2236c2ed/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=oygT0bsNCIf-x6ceQb4GZbh8akQ9RkXHb7lDw8Gco2I';
+
 
   //    sending request to Core4 for updating the info
   document.querySelector('.btn-submit').addEventListener('click', () => {
-
 
     if (document.querySelector('.status-vip').value === 'Not VIP') {
       const data = {
