@@ -38,73 +38,102 @@
 
   <div id="status"></div>
 
-  <span class="loader"></span>
+  <span class="loader">
+  </span>
+
   <div id="contactDetails">
-   
-    <!-- <p id="firstNameField">First Name:</p>
-    <p id="lastNameField">Last Name: </p>
-    <p id="emailField">Email:</p>
-    <p id="mobileField">Mobile: </p>
-    <p id="landlineField">Landline: </p> -->
-    <div>Loading...</div>
+    <div></div>
+    <form id="form" action=""></form>
   </div>
 
   <div id="contactDetails"></div>
 
   <div class="btn-wrapper">
-    <button id="edit" class="btn">Edit Info</button>
-    <button id="edit" class="btn modal__btn">Add new Contact Information</button>
+    <button id="edit" class="btn modal__btn">Edit Info</button>
+
   </div>
  
-  <!-- <button id="submit" class="btn">Submit from</button> -->
+
 
   <footer>
     <p>Powered by Lucidica&#169</p>
   </footer>
 
-  <!-- Modal -->
+ 
+</div>
+
+
+
+<!-- Modal for not vip edit -->
 <div class="modal__wrapper">
   <div class="modal">
-      <div class="modal__close"> 
-        ❌
-      </div>
-      <div class="modal__title"><span>Add new Contact Information</span> </div>
+      <div class="modal__close"> <img src="cross.png" alt="cancel" width="30px" height="30px"></div>
       <div class="modal__body">
-        <div class="">
-          <div>First Name: <input class="first-name" type="text"></div>
-          <div>Last Name:<input class="last-name" type="text"></div>
-          <div>Email:<input class="email" type="text"></div>
-          <div>Mobile:<input class="mobile" type="text"></div>
-          <div>Landline:<input class="landline" type="text"></div>
-          <button id="submit-contracts" class="btn">Submit Contacts</button>
-        </div>
-       
-      </div>
-      
-  </div>
-</div>
-<!-- <a href="#" class="btn modal__btn">Open modal</a> -->
 
-<!-- active clients -->
-<div class="modal__wrapper-clients">
-  <div class="modal">
-      <div class="modal__close-clients"> 
-        ❌
-      </div>
-      <div class="modal__title"><span>Cheack if clients active</span> </div>
-      <div class="modal__body">
-        <div class="client-active-list">
-          
-        </div>
+        <form id="modal-form" action="">
+
+        </form>
+
        
       </div>
-      
+      <button class="btn change-tech">Change tech contact</button>
+      <button class="btn change-comms">Change comms contact</button>
+
+      <button class="btn change-contact">Change contact details</button>
+      <button class="btn modal__submit">Submit changes</button>
+
   </div>
 </div>
 
 
+<div class="modal__wrapper tech">
+  <div class="modal ">
+      <div class="modal__close"> <img src="cross.png" alt="cancel" width="30px" height="30px"></div>
+      <div class="modal__body">
 
-  <script type="module" defer src="script.js"></script>
+        <form id="tech-form" action="">
+          <div class="tech">Change tech contact: </div>
+  
+          <button class="btn tech-submit">Save changes</button>
+        </form>
+
+       
+      </div>
+     
+
+  </div>
+</div>
+
+<div class="modal__wrapper contact">
+  <div class="modal ">
+      <div class="modal__close"> <img src="cross.png" alt="cancel" width="30px" height="30px"></div>
+      <div class="modal__body">
+
+        <form id="contact-form" action="">
+          contact modal
+          <div class="contact-wrapper">
+            <div class="contact-block">
+              contact here
+            </div>
+          </div>
+          <button class="btn contact-submit">Save changes</button>
+        </form>
+
+       
+      </div>
+     
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+  <script type="module" defer src="./sripts.js"></script>
 </body>
 
 </html>

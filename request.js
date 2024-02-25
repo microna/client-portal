@@ -6,8 +6,8 @@ import { contactDiv } from './script.js'
 const apiUrlResponse = 'https://prod-65.westeurope.logic.azure.com:443/workflows/bc94942c62fd477dbf2f06318d94ffab/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=XhViloLytf5XtTX11P-u5u_ZuIsBuOzKr13zGoh7JiI';
 
 const payload = {
-    email: 'clientvip@test.com'
-    // email: 'kievonfire@gmail.com'
+    // email: 'clientvip@test.com'
+    email: 'stasdev@test.com'
 };
 
 export async function fetchDataAndDisplay() {
@@ -61,13 +61,6 @@ export async function fetchDataAndDisplay() {
             function inputCommsContacts() {
                 const commsContactsArray = data.CompanyDetails.commsContacts;
                 if (commsContactsArray && commsContactsArray.length > 0) {
-
-                    // Create a <select> element
-                    // var select = document.createElement('select');
-                    // var option = document.createElement('option');
-                    // contactDiv.innerHTML +=
-                    //     `<p>comms contact</p>`
-                    // Loop through the data and create <option> elements
                     var select = document.createElement('select');
                     commsContactsArray.forEach(function (contact) {
                         contactDiv.innerHTML +=
