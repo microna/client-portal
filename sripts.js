@@ -7,12 +7,14 @@ let commsDiv = document.querySelector('.comms')
 let techDiv = document.querySelector('.tech')
 
 let techSubmitBtn = document.querySelector('.tech-submit')
+let commsSubmitBtn = document.querySelector('.comms-submit')
 let contactSubmitBtn = document.querySelector('.contact-submit')
 
 let contactDiv = document.querySelector('.contact-block')
 let form = document.getElementById('form')
 let formModal = document.getElementById('modal-form')
 let techModal = document.getElementById('tech-form')
+let commsModal = document.getElementById('comms-form')
 let contactModal = document.getElementById('contact-form')
 let formChangeModal = document.getElementById('modal-change-form')
 
@@ -166,6 +168,7 @@ fetch(url, {
 
 
             techModal.append(select)
+            commsModal.append(select)
 
 
 
@@ -176,6 +179,16 @@ fetch(url, {
                 let inputs = document.querySelectorAll('form > input')
                 inputs[14].value = select.value
             })
+
+            commsSubmitBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                let inputs = document.querySelectorAll('form > input')
+                inputs[13].value = select.value
+            })
+
+
+            
 
 
 
@@ -229,29 +242,7 @@ fetch(url, {
                    
 
                         })
-                        // let myArray = []
-                        // let contactInputs = document.querySelectorAll('.contact-block > input');
-                     
-                        
-                        // for (let i = 0; i < contactInputs.length; i += 8) {
-                        //     const contactDetails = {
-
-                        //         "firstName": contactInputs[i].value,
-                        //         "lastName": contactInputs[i + 1].value,
-                        //         "email": contactInputs[i + 2].value,
-                        //         "landline": contactInputs[i + 3].value,
-                        //         "mobile": contactInputs[i + 4].value,
-                        //         "id": contactInputs[i + 5].value,
-                        //         "vIPStatus": contactInputs[i + 6].value,
-                        //         "status": contactInputs[i + 7].value
-                            
-                        //     };
-                      
-                          
-                        //     myArray.push(contactDetails);
-                        //   }
-
-                        //   console.log(myArray)
+            
                     
                     }
                     )
@@ -303,7 +294,7 @@ fetch(url, {
                                 "email": contactInputs[i + 2].value,
                                 "landline": contactInputs[i + 3].value,
                                 "mobile": contactInputs[i + 4].value,
-                                "id": contactInputs[i + 5].value,
+                                "id": parseInt(contactInputs[i + 5].value),
                                 "vIPStatus": contactInputs[i + 6].value,
                                 "status": contactInputs[i + 7].value
                             
@@ -346,49 +337,7 @@ fetch(url, {
                             }
                         ]
                     },
-                    "ContactDetails": [
-                        // myArray
-                        {
-                            "firstName": "client",
-                            "lastName": "vip",
-                            "email": "clientvip@test.com",
-                            "landline": 'landline ContactDetails',
-                            "mobile": 'mobile ContactDetails',
-                            "id": 18014,
-                            "vIPStatus": "Yes",
-                            "status": "Active"
-                        },
-                        {
-                            "firstName": "Lucidica",
-                            "lastName": "",
-                            "email": "TestclientforAPI@clients.lucidica.com",
-                            "landline": 'landline ContactDetails',
-                            "mobile": 'mobile ContactDetails',
-                            "id": 18019,
-                            "vIPStatus": "No",
-                            "status": "Active"
-                        },
-                        {
-                            "firstName": "newvalue1",
-                            "lastName": "newvalue2",
-                            "email": "stasdev@test.com",
-                            "landline": "newvalue3",
-                            "mobile": "newvalue4",
-                            "id": 18013,
-                            "vIPStatus": "No",
-                            "status": "Active"
-                        },
-                        {
-                            "firstName": "techical",
-                            "lastName": "username",
-                            "email": 'email@test',
-                            "landline": 'landline address',
-                            "mobile": 'mobile mobile',
-                            "id": 18018,
-                            "vIPStatus": "No",
-                            "status": "Active"
-                        }
-                    ]
+                    "ContactDetails":   myArray
                 }
                 console.log(data)
 
@@ -447,6 +396,7 @@ function bindModal(trigger, modal, close) {
 
 bindModal('.modal__btn', '.modal__wrapper', '.modal__close')
 bindModal('.change-tech', '.modal__wrapper.tech', '.modal__close')
+bindModal('.change-comms', '.modal__wrapper.comms', '.modal__close')
 bindModal('.change-contact', '.modal__wrapper.contact', '.modal__close')
 
 
