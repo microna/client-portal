@@ -7,8 +7,15 @@
 }
 
 body {
+  font-size: 18px;
   height: 100vh;
   overflow: hidden;
+  font-size: 22px;
+}
+
+input {
+  font-size: 18px;
+  color: #757575;
 }
 
 *,
@@ -56,7 +63,7 @@ body {
   margin-left: auto;
 }
 
-.btn-inner > a {
+.btn-inner>a {
   margin-right: 20px;
 }
 
@@ -69,11 +76,11 @@ body {
   text-align: center;
 }
 
-.logo-inner > a {
+.logo-inner>a {
   align-items: center;
 }
 
-.logo-inner > img {
+.logo-inner>img {
   display: inline-block;
 }
 
@@ -112,7 +119,7 @@ body {
   width: 350px;
 }
 
-.close-wrapper > #close {
+.close-wrapper>#close {
   margin-left: auto;
 }
 
@@ -153,12 +160,13 @@ body {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
 
-#contactDetails > input {
+#contactDetails>input {
   display: block;
 }
 
@@ -220,7 +228,8 @@ footer {
   .btn-inner {
     margin: 0 auto;
   }
-  .btn-inner > a {
+
+  .btn-inner>a {
     display: block;
     margin-bottom: 5px;
   }
@@ -242,6 +251,7 @@ footer {
   display: none;
 
 }
+
 .modal__wrapper .modal {
   background: white;
   padding: 25px;
@@ -254,10 +264,12 @@ footer {
   align-items: stretch;
   overflow-y: scroll;
 }
+
 .modal__wrapper .modal__title,
 .modal__wrapper-clients .modal__title {
   text-align: center;
 }
+
 .modal__wrapper .modal__body,
 .modal__wrapper-clients .modal__body {
   display: flex;
@@ -265,24 +277,30 @@ footer {
   align-items: center;
   height: 100%;
 }
+
 .modal__wrapper .modal__close,
 .modal__wrapper-clients .modal__close-clients {
   cursor: pointer;
   display: flex;
   justify-content: flex-end;
 }
-#modal-form > input {
+
+#modal-form>input {
   display: block;
   padding: 5px 10px;
   margin-bottom: 10px;
   width: 100%;
 }
 
-.modal__body > div {
+#modal-form {
+  padding-bottom: 50px;
+}
+
+.modal__body>div {
   max-width: 58%;
 }
 
-.modal__body > div > .btn {
+.modal__body>div>.btn {
   margin-top: 20px;
 }
 
@@ -305,12 +323,12 @@ footer {
   padding-bottom: 10px;
 }
 
-#form > p {
+#form>p {
   margin-bottom: 10px;
   font-size: 18px;
 }
 
-.modal > .btn{
+.modal>.btn {
   margin-bottom: 20px;
 }
 
@@ -356,15 +374,15 @@ footer {
   transition: 0.4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: #2196f3;
 }
 
-input:focus + .slider {
+input:focus+.slider {
   box-shadow: 0 0 1px #2196f3;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
@@ -377,4 +395,46 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+#modal-form {
+  display: flex;
+  align-items: flex-start;
+  gap: 80px;
+}
+
+#modal-form div input,
+.contact-block input {
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #757575;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.contact-block {
+  display: flex;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+
+#comms-form select {
+  padding: 15px;
+  font-size: 18px;
+}
+
+.contact-block {
+  margin-bottom: 20px;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block !important;
+}
+
+.contact-submit__wrapper {
+  text-align: center;
 }

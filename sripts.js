@@ -28,7 +28,7 @@ const changeTechBtn = document.querySelector(".change-tech");
 const changeContactBtn = document.querySelector(".change-contact");
 
 const data = {
-  // email: 'stasdev@test.com',
+  // email: "stasdev@test.com",
   email: "clientvip@test.com",
 };
 
@@ -59,6 +59,23 @@ fetch(url, {
           form.appendChild(p);
           input.value = contact[key];
           label.textContent = key;
+
+          formModal.innerHTML = `
+          <div>
+          <p>first Name</p>
+          <input value=${data.ContactDetails[0].firstName}>
+          <p>lastName</p>
+          <input value=${data.ContactDetails[0].lastName}>
+          <p>email </p>
+          <input value=${data.ContactDetails[0].email}>
+          <p>landline</p>
+          <input value=${data.ContactDetails[0].landline}>
+          <p>mobile</p>
+          <input value=${data.ContactDetails[0].mobile}>
+          <p>id</p>
+          <input value=${data.ContactDetails[0].id}>
+          </div>
+          `;
           formModal.append(label);
           formModal.append(input);
         }
@@ -111,10 +128,8 @@ fetch(url, {
         let label = document.createElement("label");
 
         p.textContent = `${key}: ${data.CompanyDetails[key]}`;
-
         input.value = data.CompanyDetails[key];
         label.textContent = key;
-
         if (key === "commsContacts") {
           for (let obj of data.CompanyDetails.commsContacts) {
             for (let key in obj) {
@@ -131,68 +146,100 @@ fetch(url, {
           }
         }
         form.appendChild(p);
-        formModal.append(label);
-        formModal.append(input);
-        // contactModal.append(input)
+        formModal.innerHTML = `
+        <div>
+        <p>Company details</p>
+        <input value="${data.CompanyDetails.clientName}">
+        <p>Adress line 1</p>
+        <input value="${data.CompanyDetails.addressLine1}">
+        <p>Address Line 2</p>
+        <input value="${data.CompanyDetails.addressLine2}">
+        <p>City</p>
+        <input value="${data.CompanyDetails.city}">
+        <p>Post</p>
+        <input value="${data.CompanyDetails.postcode}">
+        <p>county</p>
+        <input value="${data.CompanyDetails.county}">
+        <p>Country</p>
+        <input value="${data.CompanyDetails.country}">
+        <p>Phone</p>
+        <input value="${data.CompanyDetails.phone}">
+        </div>
+        <div>
+        <p>Company reg no</p>
+        <input value="${data.CompanyDetails.companyRegNo}">
+        <p>Client Industry</p>
+        <input value="${data.CompanyDetails.clientIndustry}">
+        <p>Client size</p>
+        <input value="${data.CompanyDetails.clientSize}">
+        <p>Website</p>
+        <input value="${data.CompanyDetails.website}">
+        <p>id</p>
+        <input value="${data.CompanyDetails.id}">
+        <p>Tech contact</p>
+        <input value="${data.CompanyDetails.techContacts[0].Value}">
+        <p>Comms contact</p>
+        <input value="${data.CompanyDetails.commsContacts[0].Value}">
+        </div>`;
       }
       data.ContactDetails.forEach((contact) => {
-        // console.log(`${contact.firstName} ${contact.lastName}`)
-        // p.textContent = `${contact.firstName} ${contact.lastName}`
         var option = document.createElement("option");
-        // p.textContent = `Client list \n`
+
         option.text = `${contact.firstName} ${contact.lastName}`;
         option.setAttribute("contact-id", contact.id);
-        // p.textContent =  `Contact Details ${contact.firstName} ${contact.lastName} \n`
-        select.appendChild(option);
 
-        // console.log(`${contact.firstName} | ${contact.lastName} | ${contact.email} | ${contact.landline} | ${contact.mobile} |${contact.id} | ${contact.vIPStatus} | ${contact.status}` )
+        select.appendChild(option);
       });
 
       form.appendChild(select);
+
       formModal.append(select);
 
       techModal.append(select);
-      commsModal.append(select);
+      // commsModal.append(select);
 
       techSubmitBtn.addEventListener("click", (e) => {
         e.preventDefault();
-
-        let inputs = document.querySelectorAll("form > input");
-        inputs[14].value = select.value;
+        let inputs = document.querySelectorAll("form > div > input");
+        console.log(inputs[13].value);
+        inputs[1].value = select.value;
       });
 
       commsSubmitBtn.addEventListener("click", (e) => {
         e.preventDefault();
-
-        let inputs = document.querySelectorAll("form > input");
-        inputs[13].value = select.value;
+        let inputs = document.querySelectorAll("form > div > input");
+        console.log(inputs[14].value);
+        inputs[14].value = select.value;
       });
 
+      changeContactBtn.addEventListener("click", (e) => {});
+
       // CONTACT DETAILS
-      contactSubmitBtn.addEventListener("click", (e) => {
-        e.preventDefault();
+      // contactSubmitBtn.addEventListener("click", (e) => {
+      // e.preventDefault();
 
-        const url =
-          "https://prod-65.westeurope.logic.azure.com:443/workflows/bc94942c62fd477dbf2f06318d94ffab/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=XhViloLytf5XtTX11P-u5u_ZuIsBuOzKr13zGoh7JiI";
+      const url =
+        "https://prod-65.westeurope.logic.azure.com:443/workflows/bc94942c62fd477dbf2f06318d94ffab/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=XhViloLytf5XtTX11P-u5u_ZuIsBuOzKr13zGoh7JiI";
 
-        const data = {
-          email: "clientvip@test.com",
-        };
+      const dataContact = {
+        email: "clientvip@test.com",
+      };
 
-        const options = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        };
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataContact),
+      };
 
-        fetch(url, options)
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data.ContactDetails);
-            data.ContactDetails.forEach((obj) => {
-              contactDiv.innerHTML += `
+      fetch(url, options)
+        .then((response) => response.json())
+        .then((dataContact) => {
+          console.log(dataContact.ContactDetails);
+          dataContact.ContactDetails.forEach((obj) => {
+            contactDiv.innerHTML += `
+                                <div>
                                 <p>First Name:</p>
                                 <input class="firstname" value=${obj.firstName}>
                                 <p>Last Name:</p>
@@ -210,11 +257,14 @@ fetch(url, {
                                 <p>Status:</p>
                                 <input class="status" value=${obj.status}>
                                 <hr>
+                                </div>
                             `;
-            });
-          })
-          .catch((error) => console.error("Error:", error));
-      });
+          });
+        });
+      // .catch((error) => console.error("Error:", error));
+      // });
+
+      let result = "";
 
       submitBtn.addEventListener("click", () => {
         let inputs = formModal.getElementsByTagName("input");
@@ -235,7 +285,10 @@ fetch(url, {
         }
 
         let myArray = [];
-        let contactInputs = document.querySelectorAll(".contact-block > input");
+        let contactInputs = document.querySelectorAll(
+          ".contact-block > div > input"
+        );
+        console.log(contactInputs);
 
         for (let i = 0; i < contactInputs.length; i += 8) {
           const contactDetails = {
@@ -305,7 +358,11 @@ fetch(url, {
           body: JSON.stringify(data),
         })
           .then((response) => response.json())
-          .then((data) => console.log(data))
+          .then((data) => {
+            console.log(data.Message);
+            document.querySelector(".modal").textContent = data.Message;
+          })
+
           .catch((error) => console.error("Error:", error));
       });
     }
