@@ -57,6 +57,12 @@ body {
   margin: 0 auto;
 }
 
+a.disabled {
+  background: grey !important;
+  pointer-events: none;
+  cursor: default;
+}
+
 .btn-inner {
   padding-bottom: 12rem;
   padding-right: 5%;
@@ -418,7 +424,8 @@ input:checked+.slider:before {
   flex-wrap: wrap;
 }
 
-#comms-form select {
+#comms-form select,
+#tech-form select {
   padding: 15px;
   font-size: 18px;
 }
@@ -437,4 +444,8 @@ input:checked+.slider:before {
 
 .contact-submit__wrapper {
   text-align: center;
+}
+
+#form p:nth-child(6) {
+  display: none;
 }

@@ -55,7 +55,9 @@ fetch(url, {
           let label = document.createElement("label");
           let p = document.createElement("p");
           var select = document.createElement("select");
+
           p.textContent = `${key}: ${contact[key]}`;
+
           form.appendChild(p);
           input.value = contact[key];
           label.textContent = key;
@@ -72,12 +74,12 @@ fetch(url, {
           <input value=${data.ContactDetails[0].landline}>
           <p>mobile</p>
           <input value=${data.ContactDetails[0].mobile}>
-          <p>id</p>
-          <input value=${data.ContactDetails[0].id}>
+          <p class="hide">id</p>
+          <input class="hide" value=${data.ContactDetails[0].id}>
           </div>
           `;
-          formModal.append(label);
-          formModal.append(input);
+          // formModal.append(label);
+          // formModal.append(input);
         }
       }
       submitBtn.addEventListener("click", () => {
@@ -113,9 +115,14 @@ fetch(url, {
           body: JSON.stringify(data),
         })
           .then((response) => response.json())
-          .then((data) => console.log(data))
+          .then((data) => {
+            document.querySelector(".modal").textContent = data.status;
+          })
           .catch((error) => console.error("Error:", error));
       });
+      changeTechBtn.classList.add("hide");
+      document.querySelector(".change-comms").classList.add("hide");
+      changeContactBtn.classList.add("hide");
     }
 
     // another condition
@@ -125,6 +132,7 @@ fetch(url, {
         let input = document.createElement("input");
         let p = document.createElement("p");
         var select = document.createElement("select");
+        var select1 = document.createElement("select");
         let label = document.createElement("label");
 
         p.textContent = `${key}: ${data.CompanyDetails[key]}`;
@@ -174,8 +182,8 @@ fetch(url, {
         <input value="${data.CompanyDetails.clientSize}">
         <p>Website</p>
         <input value="${data.CompanyDetails.website}">
-        <p>id</p>
-        <input value="${data.CompanyDetails.id}">
+        <p class="hide">id</p>
+        <input class="hide" value="${data.CompanyDetails.id}">
         <p>Tech contact</p>
         <input value="${data.CompanyDetails.techContacts[0].Value}">
         <p>Comms contact</p>
@@ -184,32 +192,35 @@ fetch(url, {
       }
       data.ContactDetails.forEach((contact) => {
         var option = document.createElement("option");
+        var option1 = document.createElement("option");
 
-        option.text = `${contact.firstName} ${contact.lastName}`;
+        option.innerHTML = `${contact.firstName} ${contact.lastName}`;
         option.setAttribute("contact-id", contact.id);
 
+        option1.innerHTML = `${contact.firstName} ${contact.lastName}`;
+        option1.setAttribute("contact-id", contact.id);
+
+        select.classList.add("tech-select");
+        select1.classList.add("comms-select");
         select.appendChild(option);
+        select1.appendChild(option1);
       });
 
-      form.appendChild(select);
-
-      formModal.append(select);
-
       techModal.append(select);
-      // commsModal.append(select);
+      commsModal.append(select1);
 
       techSubmitBtn.addEventListener("click", (e) => {
         e.preventDefault();
         let inputs = document.querySelectorAll("form > div > input");
         console.log(inputs[13].value);
-        inputs[1].value = select.value;
+        inputs[13].value = select.value;
       });
 
       commsSubmitBtn.addEventListener("click", (e) => {
         e.preventDefault();
         let inputs = document.querySelectorAll("form > div > input");
         console.log(inputs[14].value);
-        inputs[14].value = select.value;
+        inputs[14].value = select1.value;
       });
 
       changeContactBtn.addEventListener("click", (e) => {});
@@ -327,8 +338,14 @@ fetch(url, {
               {
                 "@odata.type":
                   "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
-                Id: 18019,
-                Value: "Lucidica ",
+                Id: parseInt(
+                  document
+                    .querySelector(".comms-select")
+                    .options[
+                      document.querySelector(".comms-select").selectedIndex
+                    ].getAttribute("contact-id")
+                ),
+                Value: document.querySelector(".comms-select").value,
               },
             ],
             techContacts: [
@@ -337,12 +354,12 @@ fetch(url, {
                   "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
                 Id: parseInt(
                   document
-                    .querySelector("select")
+                    .querySelector(".tech-select")
                     .options[
-                      document.querySelector("select").selectedIndex
+                      document.querySelector(".tech-select").selectedIndex
                     ].getAttribute("contact-id")
                 ),
-                Value: document.querySelector("select").value,
+                Value: document.querySelector(".tech-select").value,
               },
             ],
           },
