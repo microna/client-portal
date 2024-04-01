@@ -212,14 +212,14 @@ fetch(url, {
       techSubmitBtn.addEventListener("click", (e) => {
         e.preventDefault();
         let inputs = document.querySelectorAll("form > div > input");
-        console.log(inputs[13].value);
+        // console.log(inputs[13].value);
         inputs[13].value = select.value;
       });
 
       commsSubmitBtn.addEventListener("click", (e) => {
         e.preventDefault();
         let inputs = document.querySelectorAll("form > div > input");
-        console.log(inputs[14].value);
+        // console.log(inputs[14].value);
         inputs[14].value = select1.value;
       });
 
@@ -247,7 +247,7 @@ fetch(url, {
       fetch(url, options)
         .then((response) => response.json())
         .then((dataContact) => {
-          console.log(dataContact.ContactDetails);
+          // console.log(dataContact.ContactDetails);
           dataContact.ContactDetails.forEach((obj) => {
             contactDiv.innerHTML += `
                                 <div>
@@ -299,7 +299,7 @@ fetch(url, {
         let contactInputs = document.querySelectorAll(
           ".contact-block > div > input"
         );
-        console.log(contactInputs);
+        // console.log(contactInputs);
 
         for (let i = 0; i < contactInputs.length; i += 8) {
           const contactDetails = {
@@ -316,7 +316,7 @@ fetch(url, {
           myArray.push(contactDetails);
         }
 
-        console.log(myArray);
+        // console.log(myArray);
         const data = {
           updateType: "VIP",
           UserId: 18014,
@@ -365,7 +365,7 @@ fetch(url, {
           },
           ContactDetails: myArray,
         };
-        console.log(data);
+        // console.log(data);
 
         fetch(apiUrlUpdate, {
           method: "POST",
@@ -376,8 +376,9 @@ fetch(url, {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data.Message);
-            document.querySelector(".modal").textContent = data.Message;
+            // console.log(data);
+            document.querySelector(".modal").textContent =
+              data.status + "Thanks for updating the information";
           })
 
           .catch((error) => console.error("Error:", error));
@@ -419,3 +420,5 @@ bindModal(".modal__btn", ".modal__wrapper", ".modal__close");
 bindModal(".change-tech", ".modal__wrapper.tech", ".modal__close");
 bindModal(".change-comms", ".modal__wrapper.comms", ".modal__close");
 bindModal(".change-contact", ".modal__wrapper.contact", ".modal__close");
+
+console.log("Hello! You found me 😊");
