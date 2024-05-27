@@ -28,8 +28,8 @@ const changeTechBtn = document.querySelector(".change-tech");
 const changeContactBtn = document.querySelector(".change-contact");
 
 const data = {
-  // email: "stasdev@test.com",
-  email: "clientvip@test.com",
+  email: "stasdev@test.com",
+  // email: "clientvip@test.com",
 };
 
 fetch(url, {
@@ -50,17 +50,24 @@ fetch(url, {
     if (data.updateType === "Not VIP") {
       console.log("Not VIP");
       for (let contact of data.ContactDetails) {
-        for (let key in contact) {
+        // for (let key in contact) {
           let input = document.createElement("input");
           let label = document.createElement("label");
           let p = document.createElement("p");
           var select = document.createElement("select");
 
-          p.textContent = `${key}: ${contact[key]}`;
+          // p.innerHTML = `${key}: ${contact[key]}`;
+
+          p.innerHTML = `<p>First Name : ${data.ContactDetails[0].firstName}</p>
+          <p>Last Name: ${data.ContactDetails[0].lastName}</p>
+          <p>Email: ${data.ContactDetails[0].email}</p>
+          <p>Land Line: ${data.ContactDetails[0].landline}</p>
+          <p>Mobile: ${data.ContactDetails[0].mobile}</p>
+          <p>id ${data.ContactDetails[0].id}</p>`;
 
           form.appendChild(p);
-          input.value = contact[key];
-          label.textContent = key;
+          // input.value = contact[key];
+          // label.textContent = key;
 
           formModal.innerHTML = `
           <div>
@@ -78,9 +85,7 @@ fetch(url, {
           <input class="hide" value=${data.ContactDetails[0].id}>
           </div>
           `;
-          // formModal.append(label);
-          // formModal.append(input);
-        }
+        // }
       }
       submitBtn.addEventListener("click", () => {
         let inputs = formModal.getElementsByTagName("input");
@@ -116,7 +121,12 @@ fetch(url, {
         })
           .then((response) => response.json())
           .then((data) => {
-            document.querySelector(".modal").textContent = data.status;
+            document.querySelector(".modal").textContent =
+              "Your information has been successfully submitted. Our team will review the details provided and ensure that the system is accurately updated.";
+            // Refresh the page after a delay of 3 seconds
+            setTimeout(function () {
+              location.reload();
+            }, 5000); // 3000 milliseconds = 3 seconds
           })
           .catch((error) => console.error("Error:", error));
       });
