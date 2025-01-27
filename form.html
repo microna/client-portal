@@ -2,158 +2,160 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Open+Sans:wght@500&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <title>Lucidica Client Portal</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&family=Open+Sans:wght@500&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Lucidica Client Portal</title>
 </head>
 
 <body>
-  <!-- <div class="container"> -->
-    <div class="btn-inner">
-      <a href="mailto:helpdesk@lucidica.com" class="btn">Contact HelpDesk</a>
-      <a href="mailto:accounts@lucidica.com" class="btn">Contact Accounts</a>
-      <a href="mailto:service@lucidica.com" class="btn">Contact Sales and Service</a>
-      <a class="client-portal btn disabled" href="">Edit contact details</a>
-    </div>
+<!-- <div class="container"> -->
+<div class="btn-inner">
+    <a href="mailto:helpdesk@lucidica.com" class="btn">Contact HelpDesk</a>
+    <a href="mailto:accounts@lucidica.com" class="btn">Contact Accounts</a>
+    <a href="mailto:service@lucidica.com" class="btn">Contact Sales and Service</a>
+    <a href="https://client-portal.lucidica.co.uk" class="btn">Return To Homepage</a>
+</div>
 
 
-    <div class="logo-inner">
-      <a href="https://lucidica.co.uk/">
+<div class="logo-inner">
+    <a href="https://lucidica.co.uk/">
         <img class="logo" src="download.png" alt="">
-      </a>
-    </div>
- 
-  <!-- </div> -->
-  <div class="close-wrapper">
-    <button id="close" class="btn-close">    
-      ❌
+    </a>
+</div>
+
+<!-- </div> -->
+<div class="close-wrapper">
+    <button id="close" class="btn-close">
+        ❌
     </button>
-  </div>
-  
+</div>
 
-  <div id="status"></div>
 
-  <span class="loader">
+<div id="status"></div>
+
+<span class="loader">
   </span>
 
-  <div id="contactDetails">
+<div id="contactDetails">
     <div></div>
     <form id="form" action=""></form>
-  </div>
+</div>
 
-  <div id="contactDetails"></div>
+<div id="contactDetails"></div>
 
-  <div class="btn-wrapper">
-    <button id="edit" class="btn modal__btn">Edit Info</button>
+<div class="btn-wrapper">
+    <button id="edit" class="btn modal__btn">Edit Info and Contact Details</button>
 
-  </div>
- 
+</div>
 
 
-  <footer>
+
+<footer>
     <p>Powered by Lucidica&#169</p>
-  </footer>
+</footer>
 
- 
+
 </div>
 
 
 
 <!-- Modal for not vip edit -->
 <div class="modal__wrapper">
-  <div class="modal">
-      <div class="modal__close"> <img src="cross.png" alt="cancel" width="30px" height="30px"></div>
-      <div class="modal__body">
+    <div class="modal">
+        <div class="modal__close"> <img src="cross.png" alt="cancel" width="30px" height="30px"></div>
+        <div class="modal__body">
 
-        <form id="modal-form" action="">
+            <form id="modal-form" action="">
 
-        </form>
-
-       
-      </div>
-      <button class="btn change-tech">Change tech contact</button>
-      <button class="btn change-comms">Change comms contact</button>
-
-      <button class="btn change-contact">Change contact details</button>
-      <button class="btn modal__submit">Submit changes</button>
+            </form>
 
 
-  </div>
+        </div>
+        <button class="btn change-tech">Change Technical Contacts</button>
+        <button class="btn change-comms">Change Comms Contacts</button>
+
+        <button class="btn change-contact">Change Contact Details</button>
+        <button class="btn modal__submit">Submit Changes</button>
+
+
+    </div>
 </div>
 
 
 <div class="modal__wrapper tech">
-  <div class="modal ">
-      <div class="modal__close"> <img src="cross.png" alt="cancel" width="30px" height="30px"></div>
-      <div class="modal__body">
+    <div class="modal ">
+        <div class="modal__close"> <img src="cross.png" alt="cancel" width="30px" height="30px"></div>
+        <div class="modal__body">
 
-        <form id="tech-form" action="">
-          <div class="tech">Change tech contact: </div>
-          
-          <button class="btn tech-submit">Save changes</button>
-        </form>
+            <form id="tech-form" action="">
+                <div class="tech">Change Technical Contacts </div>
 
-       
-      </div>
-     
+                <button class="btn tech-submit">Save Changes</button>
+            </form>
+            <div class="tech-notification"></div>
 
-  </div>
+        </div>
+
+
+    </div>
 </div>
 
 
 <div class="modal__wrapper comms">
-  <div class="modal ">
-      <div class="modal__close"> <img src="cross.png" alt="cancel" width="30px" height="30px"></div>
-      <div class="modal__body">
+    <div class="modal ">
+        <div class="modal__close"> <img src="cross.png" alt="cancel" width="30px" height="30px"></div>
+        <div class="modal__body">
 
-        <form id="comms-form" action="">
-          <div class="tech">Change comms contact: </div>
-  
-          <button class="btn comms-submit">Save changes</button>
-        </form>
+            <form id="comms-form" action="">
+                <div class="tech">Change Comms Contacts </div>
 
-       
-      </div>
-     
+                <button class="btn comms-submit">Save Changes</button>
+            </form>
+            <div class="comms-notification"></div>
 
-  </div>
+        </div>
+
+
+    </div>
 </div>
 
 <div class="modal__wrapper contact">
-  <div class="modal ">
-      <div class="modal__close"> <img src="cross.png" alt="cancel" width="30px" height="30px"></div>
-      <div class="modal__body">
+    <div class="modal">
+        <div class="modal__close-contact"> <img src="cross.png" alt="cancel" width="30px" height="30px"></div>
+        <div class="modal__body">
 
-        <form id="contact-form" action="">
-        
-          <div class="contact-wrapper">
-            <div class="contact-block">
-             
-            </div>
-          </div>
-          <div class="contact-submit__wrapper">
-            <button class="btn contact-submit">Save contact changes</button>
-          </div>
+            <form id="contact-form" action="">
 
-        </form>
+                <div class="contact-wrapper">
+                    <div class="contact-block">
 
-       
-      </div>
-     
+                    </div>
+                </div>
+                <div class="contact-submit__wrapper">
+                    <button class="btn contact-submit">Save Contact Changes</button>
+                </div>
 
-  </div>
+            </form>
+
+
+        </div>
+
+
+    </div>
 </div>
 
+<script>
+
+</script>
 
 
-
-  <script type="module" defer src="./sripts.js"></script>
+<script type="module" defer src="./sripts.js"></script>
 </body>
 
 </html>
